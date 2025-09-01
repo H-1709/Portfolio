@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hir Rajyaguru — Portfolio</title>
+  <title>Hir Rajyaguru - Portfolio</title>
   <meta name="description" content="Portfolio website of Rajyaguru Hir Ashishbhai — MERN-stack aspirant and IT engineering student." />
   <meta name="theme-color" content="#0ea5e9" />
   <!-- Open Graph -->
-  <meta property="og:title" content="Hir Rajyaguru-Portfolio" />
+  <meta property="og:title" content="Hir Rajyaguru — Portfolio" />
   <meta property="og:description" content="Projects, skills, and contact details." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="" />
 
   <style>
     :root{
-      --bg: #0b1220;        /* dark slate */
-      --panel:#0f172a;      /* panel */
-      --text:#e5e7eb;       /* text */
-      --muted:#9ca3af;      /* muted */
-      --brand:#0ea5e9;      /* sky-500 */
-      --accent:#22d3ee;     /* cyan-400 */
+      --bg: #0b1220;        
+      --panel:#0f172a;      
+      --text:#d8dde5;       
+      --muted:#9ca3af;      
+      --brand:#0ea5e9;     
+      --accent:#22d3ee;     
       --ring: rgba(14,165,233,.35);
       --shadow: 0 10px 25px rgba(0,0,0,.35);
     }
@@ -81,6 +81,7 @@
 
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
   </style>
+
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -95,6 +96,8 @@
     "email":"mailto:hirrajyaguru@gmail.com"
   }
   </script>
+  <script src="script.js"></script>
+
 </head>
 <body>
   <div class="container">
@@ -157,7 +160,6 @@
           <h4>To‑Do List App</h4>
           <p>Full‑stack app with React front‑end, Node/Express APIs, and MongoDB persistence. Includes auth and REST endpoints; deployed as a scalable web app.</p>
           <div class="meta"><span>React</span><span>Node</span><span>Express</span><span>MongoDB</span></div>
-          <!-- Replace # with your live/demo links when available -->
           <div class="chips"><a class="btn ghost" href="#">Live</a><a class="btn ghost" href="#">Code</a></div>
         </article>
 
@@ -183,7 +185,7 @@
         <div class="divider" aria-hidden="true"></div>
       </div>
       <div id="repoGrid" class="repo-grid" aria-live="polite" aria-busy="true">
-        <!-- Repositories will render here -->
+        <!-- Repositories will render here via external JS -->
       </div>
     </section>
 
@@ -208,35 +210,7 @@
     </footer>
   </div>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fetch GitHub repos for H-1709 and render simple cards
-    async function loadRepos(){
-      const grid = document.getElementById('repoGrid');
-      try {
-        const res = await fetch('https://api.github.com/users/H-1709/repos?sort=updated&per_page=9');
-        if(!res.ok) throw new Error('GitHub rate limit or user not found');
-        const repos = await res.json();
-        const filtered = repos
-          .filter(r => !r.fork)
-          .sort((a,b)=> new Date(b.updated_at) - new Date(a.updated_at))
-          .slice(0,9);
-        grid.setAttribute('aria-busy','false');
-        grid.innerHTML = filtered.map(r=> `
-          <article class="repo">
-            <h5><a href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a></h5>
-            <p>${r.description ? r.description : 'No description provided.'}</p>
-            <div class="meta"><span>★ ${r.stargazers_count}</span><span>⬢ ${r.language || 'N/A'}</span></div>
-          </article>
-        `).join('');
-      } catch (err){
-        grid.setAttribute('aria-busy','false');
-        grid.innerHTML = `<div class="repo">Unable to load repositories right now. You can still visit <a href="https://github.com/H-1709" target="_blank" rel="noopener">github.com/H-1709</a>.</div>`;
-      }
-    }
-    loadRepos();
-  </script>
+  <!-- Link external JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
