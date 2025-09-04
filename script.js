@@ -1,7 +1,7 @@
-// Year
+// Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Fetch GitHub repos for H-1709 and render simple cards
+// Fetch GitHub repos
 async function loadRepos(){
   const grid = document.getElementById('repoGrid');
   try {
@@ -26,3 +26,25 @@ async function loadRepos(){
   }
 }
 loadRepos();
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+// Load saved theme
+if(localStorage.getItem('theme') === 'light'){
+  root.classList.add('light');
+  themeToggle.textContent = '🌙';
+}
+
+// Toggle theme on click
+themeToggle.addEventListener('click', () => {
+  if(root.classList.contains('light')){
+    root.classList.remove('light');
+    localStorage.setItem('theme', 'dark');
+    themeToggle.textContent = '☀️';
+  } else {
+    root.classList.add('light');
+    localStorage.setItem('theme', 'light');
+    themeToggle.textContent = '🌙';
+  }
+});

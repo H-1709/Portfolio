@@ -6,13 +6,29 @@
   <title>Hir Rajyaguru - Portfolio</title>
   <meta name="description" content="Portfolio website of Rajyaguru Hir Ashishbhai — MERN-stack aspirant and IT engineering student." />
   <meta name="theme-color" content="#0ea5e9" />
+
   <!-- Open Graph -->
   <meta property="og:title" content="Hir Rajyaguru — Portfolio" />
   <meta property="og:description" content="Projects, skills, and contact details." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="" />
+  <meta property="og:image" content="assets/preview.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 
   <style>
+    /* Light mode overrides */
+:root.light{
+  --bg:#f9fafb;
+  --panel:#ffffff;
+  --text:#111827;
+  --muted:#4b5563;
+  --brand:#2563eb;
+  --accent:#0ea5e9;
+  --ring:rgba(37,99,235,.25);
+  --shadow:0 6px 18px rgba(0,0,0,.1);
+}
+
     :root{
       --bg: #0b1220;        
       --panel:#0f172a;      
@@ -37,27 +53,28 @@
     a{color:var(--accent); text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1100px; margin:auto; padding:24px}
-    header{display:flex; gap:16px; align-items:center; justify-content:space-between; padding:10px 0}
+    header{display:flex; gap:16px; align-items:center; justify-content:space-between; padding:10px 0; position:sticky; top:0; background:var(--bg); z-index:1000;}
     .brand{display:flex; align-items:center; gap:14px}
     .avatar{width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); box-shadow:0 6px 18px var(--ring)}
     .brand h1{font-size:20px; margin:0}
     .tag{font-size:13px; color:var(--muted)}
     .nav{display:flex; gap:14px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid rgba(255,255,255,.08); border-radius:14px; background:rgba(255,255,255,.03); color:var(--text); box-shadow:var(--shadow)}
-    .btn:hover{border-color:rgba(255,255,255,.18)}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid rgba(255,255,255,.08); border-radius:14px; background:rgba(255,255,255,.03); color:var(--text); box-shadow:var(--shadow); transition:all .2s}
+    .btn:hover{border-color:rgba(255,255,255,.18); transform:scale(1.05)}
     .ghost{background:transparent; box-shadow:none}
 
     .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding:28px 0}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:22px; box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:22px; box-shadow:var(--shadow); transition:all .3s}
+    .card:hover{transform:translateY(-4px)}
     .kicker{color:var(--accent); font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:.18em}
     h2{margin:.2em 0 .4em; font-size:34px; line-height:1.15}
     p{margin:.25em 0}
     .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
     .chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.1); color:var(--muted)}
 
-    section{margin:32px 0}
+    section{margin:48px 0}
     .section-title{display:flex; align-items:center; gap:12px; margin:0 0 14px}
-    .section-title h3{margin:0; font-size:20px}
+    .section-title h3{margin:0; font-size:22px}
     .divider{height:1px; flex:1; background:linear-gradient(90deg, rgba(34,211,238,.0), rgba(34,211,238,.45), rgba(14,165,233,.0))}
 
     .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
@@ -65,20 +82,22 @@
     @media (max-width: 620px){ .grid{grid-template-columns:1fr} }
 
     .project{display:flex; flex-direction:column; gap:10px}
-    .project h4{margin:0; font-size:18px}
+    .project h4{margin:0; font-size:20px}
     .project p{color:var(--muted)}
     .meta{display:flex; gap:8px; flex-wrap:wrap}
     .meta span{font-size:12px; padding:4px 8px; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08)}
 
-    footer{padding:28px 0; color:var(--muted); font-size:14px}
+    footer{padding:28px 0; color:var(--muted); font-size:14px; text-align:center}
     .repo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
     @media (max-width: 900px){ .repo-grid{grid-template-columns:repeat(2,1fr)} }
     @media (max-width: 620px){ .repo-grid{grid-template-columns:1fr} }
 
-    .repo{padding:16px; border-radius:16px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02)}
+    .repo{padding:16px; border-radius:16px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); transition:.3s}
+    .repo:hover{transform:translateY(-4px)}
     .repo h5{margin:0 0 6px; font-size:16px}
     .repo p{margin:0 0 10px; color:var(--muted); font-size:14px; min-height:40px}
 
+    .resume-btn{margin-top:16px; display:inline-block}
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
   </style>
 
@@ -88,7 +107,7 @@
     "@type":"Person",
     "name":"Rajyaguru Hir Ashishbhai",
     "jobTitle":"IT Engineering Student | MERN Stack Developer (Aspirant)",
-    "url":"",
+    "url":"https://h-1709.github.io",
     "sameAs":[
       "https://github.com/H-1709",
       "https://www.linkedin.com/in/hir-rajyaguru/"
@@ -96,26 +115,29 @@
     "email":"mailto:hirrajyaguru@gmail.com"
   }
   </script>
-  <script src="script.js"></script>
-
 </head>
 <body>
   <div class="container">
+    
     <header>
-      <div class="brand" aria-label="Site identity">
-        <div class="avatar" aria-hidden="true"></div>
-        <div>
-          <h1>Rajyaguru Hir Ashishbhai</h1>
-          <div class="tag">IT Engineering Student • MERN Stack (Aspirant)</div>
-        </div>
-      </div>
-      <nav class="nav" aria-label="Primary">
-        <a class="btn ghost" href="#projects">Projects</a>
-        <a class="btn ghost" href="#repos">GitHub</a>
-        <a class="btn ghost" href="#contact">Contact</a>
-        <a class="btn" href="mailto:hirrajyaguru@gmail.com">Hire Me</a>
-      </nav>
-    </header>
+  <div class="brand" aria-label="Site identity">
+    <div class="avatar" aria-hidden="true"></div>
+    <div>
+      <h1>Rajyaguru Hir Ashishbhai</h1>
+      <div class="tag">IT Engineering Student • MERN Stack (Aspirant)</div>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <a class="btn ghost" href="#skills">Skills</a>
+    <a class="btn ghost" href="#projects">Projects</a>
+    <a class="btn ghost" href="#repos">GitHub</a>
+    <a class="btn ghost" href="#contact">Contact</a>
+    <a class="btn" href="mailto:hirrajyaguru@gmail.com">Hire Me</a>
+    <!-- Dark/Light mode toggle -->
+    <button id="themeToggle" class="btn ghost" style="cursor:pointer">☀️</button>
+  </nav>
+</header>
+
 
     <section class="hero">
       <div class="card">
@@ -124,7 +146,7 @@
         <p>
           Motivated IT engineering student and aspiring <strong>MERN Stack Developer</strong> with strong foundations in
           C, C++, Java, and JavaScript. Skilled in problem-solving, public speaking, and teamwork. I love shipping
-          small projects end‑to‑end and learning by doing.
+          small projects end-to-end and learning by doing.
         </p>
         <div class="chips" aria-label="Key skills">
           <span class="chip">React</span>
@@ -138,79 +160,123 @@
       <div class="card">
         <h3 style="margin-top:0">Quick Facts</h3>
         <ul>
+          <li>B.E. IT (2nd Year), Expected Graduation: 2028</li>
           <li>Current SPI: <strong>7.85 / 10</strong> (SAL College of Engineering)</li>
-          <li>Open Source contributor (2025)- code & docs via Git and GitHub</li>
+          <li>Open Source contributor (2025) — code & docs via Git and GitHub</li>
           <li>50+ coding problems solved on LeetCode</li>
         </ul>
         <div class="chips">
           <a class="btn" href="https://github.com/H-1709" target="_blank" rel="noopener">GitHub Profile</a>
           <a class="btn" href="https://www.linkedin.com/in/hir-rajyaguru/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn resume-btn" href="/HIR RESUME.pdf" target="_blank">Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-title">
+        <h3>Skills</h3>
+        <div class="divider" aria-hidden="true"></div>
+      </div>
+      <div class="card">
+        <h4>Languages</h4>
+        <div class="chips">
+          <span class="chip">C</span>
+          <span class="chip">C++</span>
+          <span class="chip">Java</span>
+          <span class="chip">JavaScript</span>
+        </div>
+        <h4>Frontend</h4>
+        <div class="chips">
+          <span class="chip">React</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+        </div>
+        <h4>Backend</h4>
+        <div class="chips">
+          <span class="chip">Node.js</span>
+          <span class="chip">Express</span>
+        </div>
+        <h4>Database</h4>
+        <div class="chips">
+          <span class="chip">MongoDB</span>
+        </div>
+        <h4>Tools</h4>
+        <div class="chips">
+          <span class="chip">Git</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">VS Code</span>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <div class="section-title">
-        <h3>Featured Projects</h3>
-        <div class="divider" aria-hidden="true"></div>
+  <div class="section-title">
+    <h3>Featured Projects</h3>
+    <div class="divider" aria-hidden="true"></div>
+  </div>
+
+  <div class="grid" role="list">
+    <article class="card project" role="listitem">
+      <h4>To-Do List App</h4>
+      <p>A productivity app that helps users manage daily tasks. Includes user auth, REST APIs, and MongoDB persistence.</p>
+      <div class="meta"><span>React</span><span>Node</span><span>Express</span><span>MongoDB</span></div>
+      <div class="chips">
+        <a class="btn ghost" href="https://github.com/H-1709/todo-app" target="_blank">Code</a>
       </div>
+    </article>
 
-      <div class="grid" role="list">
-        <article class="card project" role="listitem">
-          <h4>To‑Do List App</h4>
-          <p>Full‑stack app with React front‑end, Node/Express APIs, and MongoDB persistence. Includes auth and REST endpoints; deployed as a scalable web app.</p>
-          <div class="meta"><span>React</span><span>Node</span><span>Express</span><span>MongoDB</span></div>
-          <div class="chips"><a class="btn ghost" href="#">Live</a><a class="btn ghost" href="#">Code</a></div>
-        </article>
-
-        <article class="card project" role="listitem">
-          <h4>Netflix Clone</h4>
-          <p>Responsive, pixel‑accurate UI using Flexbox/Grid, reusable utilities, and micro‑interactions. ~95+ Lighthouse accessibility/performance.</p>
-          <div class="meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          <div class="chips"><a class="btn ghost" href="#">Live</a><a class="btn ghost" href="#">Code</a></div>
-        </article>
-
-        <article class="card project" role="listitem">
-          <h4>Portfolio Website</h4>
-          <p>Personal portfolio created with HTML, CSS, and JS to showcase projects and GitHub repos. Designed for performance, accessibility, and recruiter‑friendly UX.</p>
-          <div class="meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          <div class="chips"><a class="btn ghost" href="#">Live (this page)</a><a class="btn ghost" href="https://github.com/H-1709" target="_blank" rel="noopener">More on GitHub</a></div>
-        </article>
+    <article class="card project" role="listitem">
+      <h4>Netflix Clone</h4>
+      <p>A responsive UI clone with pixel-perfect layout using HTML, CSS, and JS. Achieved 95+ Lighthouse performance score.</p>
+      <div class="meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      <div class="chips">
+        <a class="btn ghost" href="https://github.com/H-1709/Netflix" target="_blank">Code</a>
       </div>
-    </section>
+    </article>
+
+    <article class="card project" role="listitem">
+      <h4>Portfolio Website</h4>
+      <p>Personal portfolio created with HTML, CSS, and JS to showcase projects and GitHub repos. Optimized for recruiters.</p>
+      <div class="meta"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      <div class="chips">
+        <a class="btn ghost" href="https://github.com/H-1709/Portfolio" target="_blank">Code</a>
+      </div>
+    </article>
+  </div>
+</section>
+
 
     <section id="repos">
       <div class="section-title">
         <h3>Latest GitHub Repositories</h3>
         <div class="divider" aria-hidden="true"></div>
       </div>
-      <div id="repoGrid" class="repo-grid" aria-live="polite" aria-busy="true">
-        <!-- Repositories will render here via external JS -->
+      <div id="repoGrid" class="repo-grid" aria-live="polite" aria-busy="true"></div>
+      <div style="text-align:center; margin-top:20px;">
+        <a class="btn" href="https://github.com/H-1709" target="_blank">View More on GitHub</a>
       </div>
     </section>
 
     <section id="contact">
-      <div class="section-title">
-        <h3>Contact</h3>
-        <div class="divider" aria-hidden="true"></div>
-      </div>
-      <div class="card">
-        <p class="sr-only">Contact details</p>
-        <ul>
-          <li>Email: <a href="mailto:hirrajyaguru@gmail.com">hirrajyaguru@gmail.com</a></li>
-          <!-- <li>Phone: <a href="tel:+918128269608">+91 81282 69608</a></li> -->
-          <li>LinkedIn: <a href="https://www.linkedin.com/in/hir-rajyaguru/" target="_blank" rel="noopener">linkedin.com/in/hir-rajyaguru</a></li>
-          <li>GitHub: <a href="https://github.com/H-1709" target="_blank" rel="noopener">github.com/H-1709</a></li>
-        </ul>
-      </div>
-    </section>
+  <div class="section-title">
+    <h3>Contact</h3>
+    <div class="divider" aria-hidden="true"></div>
+  </div>
+  <ul>
+    <li>Email: <a href="mailto:hirrajyaguru@gmail.com">hirrajyaguru@gmail.com</a></li>
+    <li>LinkedIn: <a href="https://www.linkedin.com/in/hir-rajyaguru/" target="_blank" rel="noopener">linkedin.com/in/hir-rajyaguru</a></li>
+    <li>GitHub: <a href="https://github.com/H-1709" target="_blank" rel="noopener">github.com/H-1709</a></li>
+  </ul>
+</section>
+
 
     <footer>
       <div>© <span id="year"></span> Rajyaguru Hir. Built with vanilla HTML/CSS/JS.</div>
     </footer>
   </div>
 
-  <!-- Link external JavaScript -->
+  <!-- External JS -->
   <script src="script.js"></script>
 </body>
 </html>
